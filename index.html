@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autoplan</title>
+<meta name="description" content="Autoplan établit le planning mensuel des internes d'un service de radiologie.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+
+<h1>Autoplan</h1>
+<p class="sous-titre">Le planning mensuel des internes d'un service de radiologie.</p>
+
+<p>
+  Autoplan établit, mois par mois, la répartition des internes d'un service
+  de radiologie entre ses postes : qui est à quel poste, quelle demi-journée.
+  Il tient compte des gardes, des congés, du repos obligatoire après une
+  garde et de l'équité de charge sur l'ensemble du semestre.
+</p>
+
+<h2>Comment il fonctionne</h2>
+<ul>
+  <li>Il lit deux tableaux que le service remplit lui-même : les gardes et les congés.</li>
+  <li>Il calcule la meilleure répartition possible sous contraintes, à l'aide d'un solveur d'optimisation.</li>
+  <li>Il produit un classeur par mois : une grille par semaine, aux couleurs des postes du service.</li>
+</ul>
+
+<h2>Google Drive</h2>
+<p>
+  Le service peut, s'il le souhaite, relier Autoplan à un compte Google.
+  L'application dépose alors les plannings qu'elle produit dans un dossier
+  « Autoplan » qu'elle crée elle-même, au lieu de les écrire sur
+  l'ordinateur. Elle n'a accès qu'aux documents qu'elle a créés : le reste
+  du Drive lui est invisible. Cette liaison est facultative, et le détail
+  de ce qui est lu ou écrit figure sur la
+  <a href="confidentialite.html">page de confidentialité</a>.
+</p>
+
+<h2>Diffusion</h2>
+<p>
+  Autoplan est un outil interne, écrit pour un service précis. Il n'est ni
+  vendu, ni distribué publiquement, et ne comporte ni publicité ni suivi
+  d'aucune sorte.
+</p>
+
+<footer>
+  <a href="confidentialite.html">Règles de confidentialité</a> ·
+  Contact : <a href="mailto:samchm.99@gmail.com">samchm.99@gmail.com</a>
+</footer>
+
+</main>
+</body>
+</html>
