@@ -4,6 +4,7 @@
   --trait: #d9e2ec;
   --fond: #ffffff;
   --accent: #2f6f8f;
+  --fond-doux: #f3f6f9;
 }
 
 * { box-sizing: border-box; }
@@ -61,5 +62,58 @@ footer {
     --trait: #323f4b;
     --fond: #1a1f26;
     --accent: #8fc3dd;
+    --fond-doux: #232a33;
   }
+}
+
+/* Guide d'installation */
+
+h3 {
+  font-size: 1.02rem;
+  margin: 1.75rem 0 .5rem;
+}
+
+code {
+  font-size: .92em;
+  padding: .05em .3em;
+  border-radius: 4px;
+  background: var(--fond-doux);
+}
+
+.sommaire {
+  margin: -1.5rem 0 1rem;
+  color: var(--encre-douce);
+}
+
+.chemin { font-weight: 600; }
+
+.note {
+  padding: .75rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--fond-doux);
+  border-radius: 0 6px 6px 0;
+}
+
+.etapes { padding-left: 1.5rem; }
+.etapes > li { margin: 0 0 2rem; }
+.etapes > li::marker { font-weight: 700; color: var(--accent); }
+.etapes h3 { margin-top: 0; }
+
+/* Emplacement d'une capture d'écran à venir. */
+.capture {
+  margin: 1rem 0;
+  padding: 2rem 1rem;
+  border: 2px dashed var(--trait);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--encre-douce);
+}
+.capture img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+.capture figcaption {
+  margin-top: .5rem;
+  font-size: .8rem;
 }
