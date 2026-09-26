@@ -194,9 +194,126 @@
 <!-- ===================================================================== -->
 
 <h2 id="windows">Sur Windows</h2>
+
+<h3>Ce qu'il faut</h3>
 <p>
-  La version Windows est en préparation. Cette partie du guide sera
-  complétée à sa sortie.
+  Un PC sous <strong>Windows 10 ou 11, en 64 bits</strong> (presque tous
+  les PC récents). Aucun mot de passe d'administrateur n'est demandé :
+  Autoplan s'installe pour vous seul. Sur certains postes professionnels,
+  le service informatique interdit toute installation ; il faut alors lui
+  demander.
+</p>
+
+<ol class="etapes">
+
+<li>
+  <h3>Télécharger Autoplan</h3>
+  <p>
+    Ouvrez la <a href="https://github.com/Nyquist99/autoplan-site/releases/latest">page
+    de la dernière version</a>. Tout en bas, dans la partie « Assets »,
+    cliquez sur le fichier dont le nom se termine par
+    <strong><code>-installation.exe</code></strong> (par exemple
+    <code>Autoplan-1.0.0-installation.exe</code>).
+  </p>
+  <p>
+    Selon le navigateur, un avertissement peut dire que ce fichier
+    <em>n'est pas fréquemment téléchargé</em>. Pour le garder :
+  </p>
+  <ul>
+    <li>
+      <strong>Edge</strong> : dans la liste des téléchargements, placez la
+      souris sur le fichier, cliquez sur les trois points «&nbsp;…&nbsp;»
+      puis sur <strong>« Conserver »</strong>. Si une seconde fenêtre
+      s'ouvre, cliquez sur « Afficher plus », puis sur
+      <strong>« Conserver quand même »</strong>.
+    </li>
+    <li>
+      <strong>Chrome</strong> : cliquez sur <strong>« Conserver »</strong>
+      (ou « Télécharger quand même ») à côté du fichier.
+    </li>
+  </ul>
+  <figure class="capture">
+    <span>[CAPTURE : l'avertissement du navigateur, bouton « Conserver » entouré]</span>
+    <figcaption>captures/windows-1-telecharger.png</figcaption>
+  </figure>
+</li>
+
+<li>
+  <h3>Lancer l'installation : Windows s'interpose, c'est prévu</h3>
+  <p>
+    Double-cliquez sur le fichier téléchargé (dans la liste des
+    téléchargements du navigateur, ou dans le dossier
+    « Téléchargements »). Une fenêtre bleue s'affiche :
+    <em>« Windows a protégé votre ordinateur »</em>.
+  </p>
+  <ol>
+    <li>Cliquez sur le lien <strong>« Informations complémentaires »</strong>, sous le texte ;</li>
+    <li>un bouton apparaît en bas : cliquez sur <strong>« Exécuter quand même »</strong>.</li>
+  </ol>
+  <figure class="capture">
+    <span>[CAPTURE : la fenêtre bleue, lien « Informations complémentaires » entouré]</span>
+    <figcaption>captures/windows-2-smartscreen.png</figcaption>
+  </figure>
+  <figure class="capture">
+    <span>[CAPTURE : la même fenêtre, bouton « Exécuter quand même » entouré]</span>
+    <figcaption>captures/windows-3-executer.png</figcaption>
+  </figure>
+  <p class="note">
+    Ne cliquez pas sur « Ne pas exécuter » : c'est le bouton mis en avant,
+    mais il annule l'installation.
+  </p>
+</li>
+
+<li>
+  <h3>Installer</h3>
+  <p>
+    L'installation s'ouvre, en français. Laissez cochée la case
+    « Créer une icône sur le Bureau » si vous voulez un raccourci, cliquez
+    sur <strong>« Suivant »</strong>, puis patientez quelques secondes. À la
+    dernière page, laissez cochée la case <strong>« Exécuter
+    Autoplan »</strong> et cliquez sur <strong>« Terminer »</strong>.
+  </p>
+  <figure class="capture">
+    <span>[CAPTURE : la dernière page de l'installation, case « Exécuter Autoplan » cochée]</span>
+    <figcaption>captures/windows-4-terminer.png</figcaption>
+  </figure>
+</li>
+
+<li>
+  <h3>Autoplan est ouvert</h3>
+  <p>
+    <strong>La page d'Autoplan s'ouvre dans votre navigateur.</strong>
+    Autoplan n'a pas de fenêtre à lui : c'est cette page que vous utilisez.
+  </p>
+  <p>
+    Autoplan se signale aussi par une <strong>petite icône de
+    calendrier</strong> en bas à droite de l'écran, près de l'horloge.
+    Windows la range parfois derrière la petite flèche
+    «&nbsp;^&nbsp;» ; vous pouvez la faire glisser à côté de l'horloge
+    pour la garder en vue.
+  </p>
+  <ul>
+    <li>un <strong>clic</strong> sur l'icône rouvre la page, si vous avez fermé l'onglet ;</li>
+    <li>un <strong>clic droit</strong> propose « Quitter Autoplan », qui l'arrête. Fermer l'onglet du navigateur ne suffit pas à l'arrêter.</li>
+  </ul>
+  <figure class="capture">
+    <span>[CAPTURE : l'icône de calendrier près de l'horloge, menu du clic droit ouvert]</span>
+    <figcaption>captures/windows-5-icone.png</figcaption>
+  </figure>
+  <p>
+    Les fois suivantes, lancez Autoplan depuis le menu Démarrer (tapez
+    « Autoplan ») ou depuis l'icône du Bureau. S'il tourne déjà, la page
+    se rouvre simplement.
+  </p>
+</li>
+
+</ol>
+
+<h3>Désinstaller</h3>
+<p>
+  Menu Démarrer › <span class="chemin">Paramètres › Applications ›
+  Applications installées</span>, puis Autoplan › « Désinstaller ». Vos
+  réglages et vos plannings restent sur l'ordinateur (voir ci-dessous).
 </p>
 
 <!-- ===================================================================== -->
@@ -206,25 +323,43 @@
   Quand une nouvelle version paraît, Autoplan vous le signale et renvoie
   vers cette page.
 </p>
+<p>
+  <strong>L'alerte de sécurité revient à chaque nouvelle version</strong>,
+  même si vous aviez déjà autorisé Autoplan : pour votre ordinateur, chaque
+  version est un nouveau logiciel inconnu. C'est normal, et elle se passe
+  exactement comme la première fois.
+</p>
+<h3>Sur Mac</h3>
 <ol>
   <li>Quittez Autoplan (icône de calendrier › « Quitter Autoplan »).</li>
   <li>
-    Téléchargez et installez la nouvelle version exactement comme la
-    première (<a href="#mac">étapes 1 et 2</a>). Quand le Mac demande s'il
-    faut remplacer l'Autoplan existant, répondez
-    <strong>« Remplacer »</strong>.
+    Téléchargez et installez la nouvelle version comme la première
+    (<a href="#mac">étapes 1 et 2</a>). Quand le Mac demande s'il faut
+    remplacer l'Autoplan existant, répondez <strong>« Remplacer »</strong>.
   </li>
   <li>
-    <strong>L'alerte de sécurité revient</strong> : pour macOS, chaque
-    version est un nouveau logiciel inconnu. Refaites les
-    <a href="#mac">étapes 3 à 5</a>, comme la première fois.
+    Refaites les <a href="#mac">étapes 3 à 5</a> : Réglages Système ›
+    Confidentialité et sécurité › « Ouvrir quand même ».
+  </li>
+</ol>
+<h3>Sur Windows</h3>
+<ol>
+  <li>
+    Téléchargez la nouvelle version et lancez-la
+    (<a href="#windows">étapes 1 et 2</a>) : « Informations
+    complémentaires », puis « Exécuter quand même ».
+  </li>
+  <li>
+    L'installation remplace l'ancienne version. Si Autoplan est encore
+    ouvert, elle propose de le fermer : acceptez.
   </li>
 </ol>
 <p class="note">
   <strong>Vos données ne sont pas touchées.</strong> Réglages, semestres,
   historique d'équité et connexion Google ne sont pas rangés dans
   l'application mais dans un dossier à part de votre ordinateur
-  (<code>.autoplan</code>, dans votre dossier personnel), et les plannings
+  (<code>.autoplan</code>, dans votre dossier personnel — sur Windows,
+  <code>C:\Users\<em>votre nom</em>\.autoplan</code>), et les plannings
   exportés sont dans votre Google Drive ou dans
   <code>Documents › Autoplan</code>. Remplacer l'application, ou même la
   supprimer, les laisse en place : la nouvelle version les retrouve telle
@@ -235,7 +370,7 @@
 
 <h2 id="probleme">En cas de problème</h2>
 
-<h3>« Autoplan est endommagé et ne peut pas être ouvert »</h3>
+<h3>Sur Mac : « Autoplan est endommagé et ne peut pas être ouvert »</h3>
 <p>
   Ce message ne devrait jamais apparaître : chaque version est contrôlée
   pour l'éviter. S'il apparaît quand même, ne mettez pas Autoplan à la
@@ -244,7 +379,7 @@
   <code>.dmg</code> (le premier téléchargement a pu être interrompu) suffit.
 </p>
 
-<h3>Le bouton « Ouvrir quand même » n'apparaît pas</h3>
+<h3>Sur Mac : le bouton « Ouvrir quand même » n'apparaît pas</h3>
 <p>
   Il n'apparaît qu'après un essai d'ouverture, et pendant une heure
   environ. Double-cliquez de nouveau sur Autoplan, cliquez sur
@@ -253,10 +388,21 @@
 
 <h3>Rien ne semble se passer après le double-clic</h3>
 <p>
-  Regardez en haut à droite de l'écran : si l'icône de calendrier est là,
-  Autoplan tourne ; cliquez dessus, puis sur « Ouvrir Autoplan ». Le tout
-  premier démarrage peut demander une trentaine de secondes, le temps que
-  macOS vérifie l'application.
+  Cherchez l'icône de calendrier : en haut à droite de l'écran sur Mac,
+  près de l'horloge sur Windows (éventuellement derrière la flèche
+  «&nbsp;^&nbsp;»). Si elle est là, Autoplan tourne : cliquez dessus pour
+  rouvrir la page. Le tout premier démarrage peut demander une trentaine de
+  secondes, le temps que le système vérifie l'application.
+</p>
+
+<h3>Sur Windows, l'antivirus bloque ou supprime Autoplan</h3>
+<p>
+  Cela peut arriver : un logiciel récent, qu'aucun éditeur connu ne signe,
+  peut être pris à tort pour un logiciel malveillant — c'est une « fausse
+  alerte ». Autoplan est fabriqué pour les éviter au mieux, sans pouvoir
+  les exclure. Ne désactivez pas votre antivirus : écrivez à l'adresse
+  ci-dessous en indiquant le nom de l'antivirus et son message. Sur un
+  poste professionnel, prévenez aussi le service informatique.
 </p>
 
 <h3>Une fenêtre d'erreur s'affiche</h3>

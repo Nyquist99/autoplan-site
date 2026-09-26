@@ -1,0 +1,123 @@
+name: Construction Windows
+
+# Fabrique l'installateur Windows d'Autoplan et l'ajoute à la version
+# publiée.
+#
+# Pourquoi ici, dans le dépôt du site : il faut une machine Windows, que
+# GitHub prête gratuitement aux dépôts publics. Le code d'Autoplan vit dans
+# un dépôt privé, où ces machines sont payantes (et bloquées). Ce travail
+# emprunte donc la machine d'ici, récupère le code là-bas avec une clé en
+# lecture seule, et lance son script de construction.
+#
+# Deux déclenchements :
+#
+# - la publication d'une version (par `outils/publier_version.command` dans
+#   le dépôt du code) : le code est pris à l'étiquette de même nom, et
+#   l'installateur rejoint le .dmg dans cette version ;
+# - à la main (« Run workflow »), pour un essai : le code est pris sur la
+#   branche indiquée, et l'installateur n'est pas publié mais laissé en
+#   téléchargement sur la page du travail, sept jours.
+#
+# Secrets nécessaires (Settings › Secrets and variables › Actions) :
+#   AUTOPLAN_LECTURE_CODE          clé GitHub, lecture seule du dépôt Autoplan
+#   AUTOPLAN_GOOGLE_CLIENT_ID      identifiant du projet Google
+#   AUTOPLAN_GOOGLE_CLIENT_SECRET  son secret
+# GitHub les masque dans le journal, qui est public.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Numéro de version à inscrire dans l'essai (par exemple 1.2.0)"
+        required: true
+      branche:
+        description: "Branche du dépôt Autoplan à construire"
+        required: true
+        default: main
+
+# Juste ce qu'il faut pour ajouter un fichier à une version publiée.
+permissions:
+  contents: write
+
+concurrency:
+  group: construction-windows-${{ github.event.release.tag_name || github.run_id }}
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - name: Numéro de version et code à construire
+        id: cible
+        shell: pwsh
+        # Les saisies passent par l'environnement, jamais collées dans le
+        # script : un texte habilement tourné y deviendrait une commande.
+        env:
+          ETIQUETTE: ${{ github.event.release.tag_name }}
+          SAISIE_VERSION: ${{ inputs.version }}
+          SAISIE_BRANCHE: ${{ inputs.branche }}
+        run: |
+          if ($env:ETIQUETTE) {
+            $version = $env:ETIQUETTE.TrimStart('v')
+            $reference = $env:ETIQUETTE
+          } else {
+            $version = $env:SAISIE_VERSION
+            $reference = $env:SAISIE_BRANCHE
+          }
+          if ($version -notmatch '^\d+\.\d+\.\d+$') { throw "Numéro de version refusé : « $version »" }
+          if ($reference -notmatch '^[A-Za-z0-9._/-]+$') { throw "Nom de branche refusé : « $reference »" }
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "reference=$reference" >> $env:GITHUB_OUTPUT
+
+      - name: Code d'Autoplan (dépôt privé, lecture seule)
+        uses: actions/checkout@v4
+        with:
+          repository: Nyquist99/Autoplan
+          ref: ${{ steps.cible.outputs.reference }}
+          token: ${{ secrets.AUTOPLAN_LECTURE_CODE }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Inno Setup
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe")) {
+            choco install innosetup --yes --no-progress
+          }
+
+      - name: Construction
+        shell: pwsh
+        env:
+          AUTOPLAN_GOOGLE_CLIENT_ID: ${{ secrets.AUTOPLAN_GOOGLE_CLIENT_ID }}
+          AUTOPLAN_GOOGLE_CLIENT_SECRET: ${{ secrets.AUTOPLAN_GOOGLE_CLIENT_SECRET }}
+        # -SansTests : pour une version publiée, la suite a tourné sur Mac
+        # sur ce commit précis (la publication le vérifie). Le diagnostic
+        # `--autotest` de l'exécutable construit, lui, est toujours lancé.
+        run: ./outils/construire_windows.ps1 -Version ${{ steps.cible.outputs.version }} -SansTests
+
+      - name: Ajout à la version publiée
+        if: github.event_name == 'release'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ETIQUETTE: ${{ github.event.release.tag_name }}
+          FICHIER: dist/Autoplan-${{ steps.cible.outputs.version }}-installation.exe
+        run: gh release upload $env:ETIQUETTE $env:FICHIER --clobber --repo $env:GITHUB_REPOSITORY
+
+      - name: Installateur d'essai
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Autoplan-${{ steps.cible.outputs.version }}-essai-windows
+          path: dist/Autoplan-${{ steps.cible.outputs.version }}-installation.exe
+          retention-days: 7
+          if-no-files-found: error
